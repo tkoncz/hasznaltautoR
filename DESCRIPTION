@@ -21,5 +21,6 @@ Imports:
     digest
 Suggests: 
     roxygen2,
-    knitr
+    knitr,
+    testthat
 RoxygenNote: 6.1.1

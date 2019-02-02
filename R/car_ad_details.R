@@ -19,6 +19,8 @@
 getAdDetailsFromUrl <- function(ad_url) {
     ad_html <- xml2::read_html(ad_url)
 
+    ad_code <- gsub(".*-(\\d{1,15})$", "\\1", ad_url)      
+
     ad_title <- ad_html %>%
         rvest::html_nodes("h1") %>%
         rvest::html_text() %>%
@@ -34,18 +36,21 @@ getAdDetailsFromUrl <- function(ad_url) {
             xpath = "//table[@class='hirdetesadatok']//td[@class='bal pontos']"
         ) %>%
         rvest::html_text()
-
+    ad_main_attributes <- gsub(":", "", ad_main_attributes)
+    
     ad_main_attribute_values <- ad_html %>%
         rvest::html_nodes(
             xpath = "//table[@class='hirdetesadatok']//td[not (@class='bal pontos')]"
         ) %>%
         rvest::html_text()
 
-    ad_main_attributes <- gsub(":", "", ad_main_attributes)
-
-    ad_table <- list(ad_title, ad_description, ad_url, ad_main_attribute_values) %>%
+    ad_table <- list(
+        ad_code, ad_title, ad_description, ad_url, ad_main_attribute_values
+    ) %>%
         purrr::flatten() %>%
-        purrr::set_names(c("Cím", "Leírás", "URL", ad_main_attributes)) %>%
+        purrr::set_names(c(
+            "Hirdetéskód", "Cím", "Leírás", "URL", ad_main_attributes
+        )) %>%
         dplyr::as_data_frame()
 
     ad_table
