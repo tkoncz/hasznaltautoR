@@ -1,0 +1,8 @@
+inst/doc
+setup.R
+.Rhistory
+.RData
+.Rproj.user
+.Ruserdata
+*.txt
+data/*

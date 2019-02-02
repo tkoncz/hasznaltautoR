@@ -1,0 +1,25 @@
+Package: hasznaltautoR
+Title: Scraper for car ads on hasznaltauto.hu
+Version: 0.1.0
+Date: 2019-02-02
+Authors@R: 
+    person("Tamas", "Koncz", role = c("aut", "cre"), email = "t.koncz@gmail.com")
+Description: Easy scraping of car ads.
+License: AGPL-3
+URL: https://github.com/tomiaJO/hasznaltautoR
+Depends: 
+    R (>= 3.5.0)
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    magrittr,
+    dplyr,
+    purrr,
+    readr,
+    rvest,
+    xml2,
+    digest
+Suggests: 
+    roxygen2,
+    knitr
+RoxygenNote: 6.1.1

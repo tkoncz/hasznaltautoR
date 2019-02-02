@@ -1,0 +1,5 @@
+^notes_for_tests\.txt$
+^data$
+^setup\.R$
+^.*\.Rproj$
+^\.Rproj\.user$
