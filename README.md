@@ -1,6 +1,6 @@
 # hasznaltautoR
 
-A friendly package to help you pull car ad details from [hasznaltauto.hu]https://www.hasznaltauto.hu/).  
+A friendly R package to help you pull car ad details from [hasznaltauto.hu]https://www.hasznaltauto.hu/).  
 
 ## Installation
 ```{r eval=F}
