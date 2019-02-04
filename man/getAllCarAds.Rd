@@ -2,7 +2,8 @@
 % Please edit documentation in R/all_car_ads.R
 \name{getAllCarAds}
 \alias{getAllCarAds}
-\title{Get all car ads from search landing page URL}
+\title{Get all car ads from search landing page URL.
+Results are automatically saved in the folder defined by `save_path`.}
 \usage{
 getAllCarAds(search_landing_url, save_path = "data")
 }
@@ -16,7 +17,8 @@ data_frame, containing details for all ads found from the starting URL.
   In addition, results will be save to the folder specified in `save_path`.
 }
 \description{
-Get all car ads from search landing page URL
+Get all car ads from search landing page URL.
+Results are automatically saved in the folder defined by `save_path`.
 }
 \examples{
 \dontrun{getAllCarAds("https://www.hasznaltauto.hu/szemelyauto/volvo/xc60")}

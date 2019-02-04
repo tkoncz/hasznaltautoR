@@ -9,3 +9,6 @@ test_that("Advertisement code is returned correctly", {
 
     expect_equal(getAdDetailsFromUrl(ad_url)[["Hirdetéskód"]], ad_code)
 })
+
+# clean-up ----
+if(dir.exists("data")) unlink("data", recursive = TRUE)

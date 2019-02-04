@@ -51,7 +51,7 @@ getAdDetailsFromUrl <- function(ad_url) {
         purrr::set_names(c(
             "Hirdetéskód", "Cím", "Leírás", "URL", ad_main_attributes
         )) %>%
-        dplyr::as_data_frame()
+        dplyr::as_tibble()
 
     ad_table
 }

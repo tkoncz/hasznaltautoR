@@ -1,4 +1,5 @@
-#' Get all car ads from search landing page URL
+#' Get all car ads from search landing page URL.
+#' Results are automatically saved in the folder defined by `save_path`.
 #'
 #' @param search_landing_url String, URL for search results.
 #' @param save_path String, folder to which the results in .csv should be saved to.
@@ -58,6 +59,8 @@ getAllCarAdUrls <- function(search_landing_url) {
 #'
 #' @importFrom magrittr %>%
 saveAdsToCSV <- function(ads, search_landing_url, save_path) {
+    if(!dir.exists(save_path)) dir.create(save_path, recursive = TRUE)
+    
     file_name <- fileNameFromUrl(search_landing_url)
     readr::write_csv(ads, path = file.path(save_path, file_name))
 }

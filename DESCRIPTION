@@ -22,5 +22,6 @@ Imports:
 Suggests: 
     roxygen2,
     knitr,
-    testthat
+    testthat,
+    mockery
 RoxygenNote: 6.1.1
