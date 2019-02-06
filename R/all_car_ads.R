@@ -9,12 +9,19 @@
 #'
 #' @importFrom magrittr %>%
 #'
-#' @examples \dontrun{getAllCarAds("https://www.hasznaltauto.hu/szemelyauto/volvo/xc60")}
+#' @examples \dontrun{
+#'   getAllCarAds("https://www.hasznaltauto.hu/szemelyauto/volvo/xc60")
+#' }
 #'
 #' @export
-getAllCarAds <- function(search_landing_url, save_path = "data") {
-    ads <- getAllCarAdUrls(search_landing_url) %>%
-        purrr::map_df(~getAdDetailsFromUrl(.x))
+getAllCarAds <- function(search_landing_url, save_path = "data", 
+                         wait_between_request = 0) {
+    all_ad_urls <- getAllCarAdUrls(search_landing_url) 
+    
+    ads <- purrr::map_df(all_ad_urls, ~{
+        Sys.sleep(wait_between_request)
+        getAdDetailsFromUrl(.x)
+    })
 
     saveAdsToCSV(ads, search_landing_url, save_path)
 
@@ -29,24 +36,33 @@ getAllCarAds <- function(search_landing_url, save_path = "data") {
 #'
 #' @importFrom magrittr %>%
 getAllCarAdUrls <- function(search_landing_url) {
-    message("looking for all ads...")
-    last_page_url <- xml2::read_html(search_landing_url) %>%
-        rvest::html_node(xpath = "//li[@class='last']//a") %>% ##enough to find the first match
-        rvest::html_attr("href")
-
-    last_page_number <- gsub(".*/page(\\d{1,10})$", "\\1", last_page_url)
+    last_page_number <- getLastPageNumber(search_landing_url)
 
     urls_for_cars_on_page <- purrr::map(1:last_page_number, ~{
-        page_url <- gsub("\\d{1,10}$", .x, last_page_url)
-
-        xml2::read_html(page_url) %>%
-            rvest::html_nodes(xpath = "//div[@class='col-xs-28']//h3/a") %>%
-            rvest::html_attr("href")
+        getCarAdUrlsOnPage(page_url = paste0(search_landing_url, "/page", .x))
     }) %>% purrr::flatten_chr()
 
     message(paste0("ads found: ", length(urls_for_cars_on_page)))
 
     urls_for_cars_on_page
+}
+
+getLastPageNumber <- function(url_of_page_with_ad_list) {
+    last_page_number <- xml2::read_html(url_of_page_with_ad_list) %>%
+        rvest::html_node(xpath = "//li[@class='last']//a") %>% # enough to find the first match, hence "node" is used
+        rvest::html_attr("data-page")
+
+    if(!is.na(last_page_number)) {
+        as.integer(last_page_number) + 1
+    } else {
+        1
+    }
+}
+
+getCarAdUrlsOnPage <- function(page_url) {
+    xml2::read_html(page_url) %>%
+        rvest::html_nodes(xpath = "//div[@class='col-xs-28']//h3/a") %>%
+        rvest::html_attr("href")
 }
 
 #' Save ads resulting for scraping to a .csv file
