@@ -3,6 +3,8 @@
 #'
 #' @param search_landing_url String, URL for search results.
 #' @param save_path String, folder to which the results in .csv should be saved to.
+#' @param wait_between_requests Integer, how many seconds to wait between sending request
+#'   to get specific details from car advertisements.
 #'
 #' @return data_frame, containing details for all ads found from the starting URL.
 #'   In addition, results will be save to the folder specified in `save_path`.
@@ -15,11 +17,11 @@
 #'
 #' @export
 getAllCarAds <- function(search_landing_url, save_path = "data", 
-                         wait_between_request = 0) {
+                         wait_between_requests = 0) {
     all_ad_urls <- getAllCarAdUrls(search_landing_url) 
     
     ads <- purrr::map_df(all_ad_urls, ~{
-        Sys.sleep(wait_between_request)
+        Sys.sleep(wait_between_requests)
         getAdDetailsFromUrl(.x)
     })
 

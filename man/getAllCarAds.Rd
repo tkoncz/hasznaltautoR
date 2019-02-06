@@ -5,12 +5,16 @@
 \title{Get all car ads from search landing page URL.
 Results are automatically saved in the folder defined by `save_path`.}
 \usage{
-getAllCarAds(search_landing_url, save_path = "data")
+getAllCarAds(search_landing_url, save_path = "data",
+  wait_between_requests = 0)
 }
 \arguments{
 \item{search_landing_url}{String, URL for search results.}
 
 \item{save_path}{String, folder to which the results in .csv should be saved to.}
+
+\item{wait_between_requests}{Integer, how many seconds to wait between sending request
+to get specific details from car advertisements.}
 }
 \value{
 data_frame, containing details for all ads found from the starting URL.
@@ -21,6 +25,8 @@ Get all car ads from search landing page URL.
 Results are automatically saved in the folder defined by `save_path`.
 }
 \examples{
-\dontrun{getAllCarAds("https://www.hasznaltauto.hu/szemelyauto/volvo/xc60")}
+\dontrun{
+  getAllCarAds("https://www.hasznaltauto.hu/szemelyauto/volvo/xc60")
+}
 
 }
