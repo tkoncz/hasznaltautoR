@@ -19,17 +19,19 @@
 getAdDetailsFromUrl <- function(ad_url) {
     ad_html <- xml2::read_html(ad_url)
 
-    ad_code            <- getAdCode(ad_url)      
+    ad_code            <- getAdCode(ad_url)
     ad_title           <- getAdTitle(ad_html)
     ad_description     <- getAdDescription(ad_html)
     ad_main_attributes <- getAdMainAttributes(ad_html)
+    ad_accessories     <- getAdAccessories(ad_html)
 
     ad_table <- purrr::flatten(list(
-        "Hirdetéskód" = ad_code, 
-        "Cím"         = ad_title, 
-        "Leírás"      = ad_description,
-        "URL"         = ad_url, 
-        ad_main_attributes
+        "Hirdetéskód"   = ad_code,
+        "Cím"           = ad_title,
+        "Leírás"        = ad_description,
+        "URL"           = ad_url,
+        ad_main_attributes,
+        "Felszereltség" = ad_accessories
     )) %>% dplyr::as_tibble()
 
     ad_table
@@ -72,4 +74,14 @@ getAdMainAttributes <- function(ad_html) {
     )
 
     ad_main_attribute_values
+}
+
+getAdAccessories <- function(ad_html) {
+    ad_accessories <- ad_html %>%
+        rvest::html_nodes(
+            xpath = "//div[@class='row felszereltseg']//li"
+        ) %>% rvest::html_text() %>%
+        paste(collapse = ", ")
+    
+    ad_accessories
 }
