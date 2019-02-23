@@ -2,27 +2,21 @@
 % Please edit documentation in R/all_car_ads.R
 \name{getAllCarAds}
 \alias{getAllCarAds}
-\title{Get all car ads from search landing page URL.
-Results are automatically saved in the folder defined by `save_path`.}
+\title{Get all car ads from search landing page URL.}
 \usage{
-getAllCarAds(search_landing_url, save_path = "data",
-  wait_between_requests = 0)
+getAllCarAds(search_landing_url, wait_between_requests = 0)
 }
 \arguments{
 \item{search_landing_url}{String, URL for search results.}
-
-\item{save_path}{String, folder to which the results in .csv should be saved to.}
 
 \item{wait_between_requests}{Integer, how many seconds to wait between sending request
 to get specific details from car advertisements.}
 }
 \value{
 data_frame, containing details for all ads found from the starting URL.
-  In addition, results will be save to the folder specified in `save_path`.
 }
 \description{
 Get all car ads from search landing page URL.
-Results are automatically saved in the folder defined by `save_path`.
 }
 \examples{
 \dontrun{
