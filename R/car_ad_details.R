@@ -60,7 +60,7 @@ getAdDescription <- function(ad_html) {
 getAdMainAttributes <- function(ad_html) {
     ad_main_attribute_values <- ad_html %>%
         rvest::html_nodes(
-            xpath = "//table[@class='hirdetesadatok']//td[not (@class='bal pontos')]"
+            xpath = "//table[@class='hirdetesadatok']//td[not (@class='bal pontos')]//strong"
         ) %>%
         rvest::html_text()
 
@@ -84,15 +84,15 @@ getAdAccessories <- function(ad_html) {
             xpath = "//div[@class='row felszereltseg']//li"
         ) %>% rvest::html_text() %>%
         paste(collapse = ", ")
-    
+
     ad_accessories
 }
 
 getAdLocation <- function(ad_html) {
-    ad_html %>% 
+    ad_html %>%
         rvest::html_node(
             xpath = "//div[span/@id='adatlap-terkep-mutat']"
-        ) %>% 
-        rvest::html_text() %>% 
+        ) %>%
+        rvest::html_text() %>%
         gsub("Térkép megjelenítése", "", .)
 }

@@ -14,8 +14,8 @@
 #'
 #' @export
 getAllCarAds <- function(search_landing_url, wait_between_requests = 0) {
-    all_ad_urls <- getAllCarAdUrls(search_landing_url) 
-    
+    all_ad_urls <- getAllCarAdUrls(search_landing_url)
+
     ads <- purrr::map_df(all_ad_urls, ~{
         Sys.sleep(wait_between_requests)
         getAdDetailsFromUrl(.x)
