@@ -1,5 +1,7 @@
 # hasznaltautoR
 
+[![Travis build status](https://travis-ci.org/tomiaJO/hasznaltautoR.svg?branch=master)](https://travis-ci.org/tomiaJO/hasznaltautoR)
+
 A friendly R package to help you pull car ad details from [hasznaltauto.hu](https://www.hasznaltauto.hu/).  
 
 ## Installation

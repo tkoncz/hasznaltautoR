@@ -1,3 +1,4 @@
+^\.travis\.yml$
 ^notes_for_tests\.txt$
 ^data$
 ^setup\.R$
