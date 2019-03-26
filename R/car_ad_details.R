@@ -27,13 +27,13 @@ getAdDetailsFromUrl <- function(ad_url) {
     ad_location        <- getAdLocation(ad_html)
 
     ad_table <- purrr::flatten(list(
-        "Hirdetéskód"   = ad_code,
-        "Cím"           = ad_title,
-        "Leírás"        = ad_description,
-        "URL"           = ad_url,
+        "Hirdet\U00E9skod"   = ad_code,
+        "C\U00EDm"           = ad_title,
+        "Le\U00EDr\U00E1s"   = ad_description,
+        "URL"                = ad_url,
         ad_main_attributes,
-        "Felszereltség" = ad_accessories,
-        "Helyszin"      = ad_location
+        "Felszerelts\U00E9g" = ad_accessories,
+        "Helysz\U00EDn"      = ad_location
     )) %>% dplyr::as_tibble()
 
     ad_table
@@ -94,5 +94,5 @@ getAdLocation <- function(ad_html) {
             xpath = "//div[span/@id='adatlap-terkep-mutat']"
         ) %>%
         rvest::html_text() %>%
-        gsub("Térkép megjelenítése", "", .)
+        gsub("T\U00E9rk\U00E9p megjelen\U00EDt\U00E9se", "", .)
 }

@@ -7,7 +7,7 @@ test_that("Advertisement code is returned correctly", {
     )
     ad_code <- "13821432"
 
-    expect_equal(getAdDetailsFromUrl(ad_url)[["Hirdetéskód"]], ad_code)
+    expect_equal(getAdDetailsFromUrl(ad_url)[["Hirdetéskod"]], ad_code)
 })
 
 # clean-up ----
